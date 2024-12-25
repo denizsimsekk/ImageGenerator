@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        dataBinding = true
+    }
 }
 val nav_version = "2.8.5"
 dependencies {
@@ -54,5 +57,7 @@ dependencies {
     // Feature module support for Fragments
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
     implementation ("androidx.core:core-splashscreen:1.0.0-beta02")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
 
 }
