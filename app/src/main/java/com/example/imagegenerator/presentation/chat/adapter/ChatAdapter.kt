@@ -14,6 +14,6 @@ class ChatAdapter :RecyclerView.Adapter<BaseViewHolder<Chat>>() {
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<Chat>, position: Int) {
-        TODO("Not yet implemented")
+
     }
 }
