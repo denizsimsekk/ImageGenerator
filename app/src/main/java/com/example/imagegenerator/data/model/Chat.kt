@@ -1,3 +1,6 @@
 package com.example.imagegenerator.data.model
 
-data class Chat(val chat:String?=null)
+sealed class Chat {
+    data class IncomingMessage(val message: String) : Chat()
+    data class OutgoingMessage(val message: String) : Chat()
+}
