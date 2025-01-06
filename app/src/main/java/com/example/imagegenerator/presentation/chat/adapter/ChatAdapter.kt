@@ -18,6 +18,11 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
         notifyDataSetChanged()
     }
 
+    fun addChat(chat: Chat){
+        chatList.add(chat)
+        notifyItemInserted(chatList.size - 1)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Chat> {
         val layoutInflater=LayoutInflater.from(parent.context)
         return when(viewType){

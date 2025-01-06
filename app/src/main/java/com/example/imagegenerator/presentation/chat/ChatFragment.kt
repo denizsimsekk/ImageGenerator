@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import com.example.imagegenerator.R
 import com.example.imagegenerator.databinding.FragmentChatBinding
+import com.example.imagegenerator.presentation.chat.adapter.ChatAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ChatFragment : Fragment() {
+    private lateinit var adapter:ChatAdapter
     private lateinit var binding: FragmentChatBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +21,21 @@ class ChatFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_chat,container,false)
+    ): View {
+        binding=FragmentChatBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter= ChatAdapter()
+        binding.apply {
+            promptEdittext.setOnClickListener {
+                if(!promptEdittext.text.isNullOrEmpty()){
+
+                }
+            }
+        }
+
     }
 }

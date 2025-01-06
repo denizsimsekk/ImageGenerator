@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "2.0.21"
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -34,8 +36,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures{
-        dataBinding = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 val nav_version = "2.8.5"
@@ -56,8 +58,13 @@ dependencies {
 
     // Feature module support for Fragments
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
-    implementation ("androidx.core:core-splashscreen:1.0.0-beta02")
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+}
 
-
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
