@@ -18,23 +18,20 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
         notifyDataSetChanged()
     }
 
-    fun addChat(chat: Chat){
-        chatList.add(chat)
-        notifyItemInserted(chatList.size - 1)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Chat> {
-        val layoutInflater=LayoutInflater.from(parent.context)
-        return when(viewType){
-            INCOMING_MESSAGE_VIEW_TYPE->{
-                val binding=IncomingChatItemBinding.inflate(layoutInflater,parent, false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            INCOMING_MESSAGE_VIEW_TYPE -> {
+                val binding = IncomingChatItemBinding.inflate(layoutInflater, parent, false)
                 IncomingChatViewHolder(binding)
             }
-            OUTGOING_MESSAGE_VIEW_TYPE->{
-                val binding=OutgoingChatItemBinding.inflate(layoutInflater,parent, false)
+
+            OUTGOING_MESSAGE_VIEW_TYPE -> {
+                val binding = OutgoingChatItemBinding.inflate(layoutInflater, parent, false)
                 OutgoingChatViewHolder(binding)
             }
-            else->{
+
+            else -> {
                 throw IllegalArgumentException("Invalid view type")
             }
         }
@@ -43,9 +40,14 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
     override fun getItemCount(): Int = chatList.size
 
     override fun onBindViewHolder(holder: BaseViewHolder<Chat>, position: Int) {
-        when(holder){
-            is IncomingChatViewHolder->{holder.bind(chatList[position])}
-            is OutgoingChatViewHolder->{holder.bind(chatList[position])}
+        when (holder) {
+            is IncomingChatViewHolder -> {
+                holder.bind(chatList[position])
+            }
+
+            is OutgoingChatViewHolder -> {
+                holder.bind(chatList[position])
+            }
         }
     }
 
