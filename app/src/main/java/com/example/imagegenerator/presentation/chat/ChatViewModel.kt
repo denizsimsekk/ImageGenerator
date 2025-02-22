@@ -3,29 +3,36 @@ package com.example.imagegenerator.presentation.chat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.imagegenerator.data.model.Chat
+import com.example.imagegenerator.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ChatViewModel : ViewModel() {
-    private val _chats = MutableLiveData<List<Chat>>()
-    val chats: LiveData<List<Chat>> = _chats
-
-    val url = "https://image.pollinations.ai/prompt/"
+    private val _chats = MutableLiveData<MutableList<Chat>>()
+    val chats: LiveData<MutableList<Chat>> = _chats
 
     init {
         _chats.value = mutableListOf()
     }
 
     fun addChat(chat: Chat) {
-        if (_chats.value!!.isEmpty() || _chats.value?.last() !is Chat.OutgoingMessage) {
-            val updatedList = _chats.value.orEmpty().toMutableList()
-            updatedList.add(chat)
-            updatedList.add(Chat.IncomingMessage((chat as Chat.OutgoingMessage).message.toPrompt()))
-            _chats.value = updatedList
+        viewModelScope.launch {
+            if (_chats.value!!.isEmpty() || _chats.value?.last() !is Chat.OutgoingMessage) {
+                val updatedList = mutableListOf<Chat>()
+                updatedList.add(chat)
+                updatedList.add(Chat.IncomingMessage((chat as Chat.OutgoingMessage).message.toPrompt()))
+                _chats.value?.clear()
+                _chats.value = updatedList
+            }
         }
+
     }
 
-    fun String.toPrompt(): String = url + this.replaceTurkishChars().replace(" ", "-")
+    fun String.toPrompt(): String =
+        Constants.BASE_URL + this.replaceTurkishChars().replace(" ", "-")
 
     fun String.replaceTurkishChars(): String {
         val replacements = mapOf(

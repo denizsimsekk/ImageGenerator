@@ -13,9 +13,8 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
     private val chatList = arrayListOf<Chat>()
 
     fun setChats(list: List<Chat>) {
-        chatList.clear()
         chatList.addAll(list)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(chatList.size-2,2)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Chat> {
