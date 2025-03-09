@@ -59,10 +59,8 @@ dependencies {
     // Feature module support for Fragments
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
     implementation("androidx.core:core-splashscreen:1.0.0-beta02")
-    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-    implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
     implementation("io.coil-kt.coil3:coil-compose:3.1.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
 }
