@@ -1,6 +1,7 @@
 package com.example.imagegenerator.presentation.chat.adapter
 
 import android.app.Dialog
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.Window
 import coil3.load
@@ -12,15 +13,19 @@ import com.example.imagegenerator.data.model.Chat
 import com.example.imagegenerator.databinding.ImageDialogLayoutBinding
 import com.example.imagegenerator.databinding.IncomingChatItemBinding
 
-class IncomingChatViewHolder(val binding: IncomingChatItemBinding) :
+class IncomingChatViewHolder(
+    val binding: IncomingChatItemBinding,
+    val onDownloadClick: ((String) -> Unit)?
+) :
     BaseViewHolder<Chat.IncomingMessage>(binding.root) {
+
     override fun bind(item: Chat.IncomingMessage) {
         binding.imageResponse.load(item.message) {
             crossfade(true)
             placeholder(R.drawable.ic_progress)
             error(R.drawable.baseline_error_24)
             listener(
-                onSuccess = {_,_->
+                onSuccess = { _, _ ->
                     binding.imageResponse.setOnClickListener {
                         showImageDialog(item.message)
                     }
@@ -29,12 +34,12 @@ class IncomingChatViewHolder(val binding: IncomingChatItemBinding) :
         }
     }
 
-    private fun showImageDialog(reply:String){
+    private fun showImageDialog(reply: String) {
         val dialog = Dialog(binding.root.context)
 
         val inflater: LayoutInflater = LayoutInflater.from(binding.root.context)
 
-        val dialogBinding=ImageDialogLayoutBinding.inflate(inflater)
+        val dialogBinding = ImageDialogLayoutBinding.inflate(inflater)
         dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(dialogBinding.root)
 
@@ -42,6 +47,10 @@ class IncomingChatViewHolder(val binding: IncomingChatItemBinding) :
             crossfade(true)
             placeholder(R.drawable.ic_progress)
             error(R.drawable.baseline_error_24)
+        }
+
+        dialogBinding.download.setOnClickListener {
+            onDownloadClick?.invoke(reply)
         }
 
         dialogBinding.close.setOnClickListener {

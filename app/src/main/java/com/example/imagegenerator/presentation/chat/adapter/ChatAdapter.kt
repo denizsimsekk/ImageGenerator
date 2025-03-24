@@ -1,9 +1,9 @@
 package com.example.imagegenerator.presentation.chat.adapter
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.imagegenerator.R
 import com.example.imagegenerator.data.model.Chat
 import com.example.imagegenerator.databinding.IncomingChatItemBinding
 import com.example.imagegenerator.databinding.OutgoingChatItemBinding
@@ -14,7 +14,13 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
 
     fun setChats(list: List<Chat>) {
         chatList.addAll(list)
-        notifyItemRangeInserted(chatList.size-2,2)
+        notifyItemRangeInserted(chatList.size - 2, 2)
+    }
+
+    private var onDownloadClick: ((String) -> Unit)? = null
+
+    fun setOnDownloadClickCallback(callback: (String) -> Unit) {
+        onDownloadClick = callback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Chat> {
@@ -22,7 +28,7 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
         return when (viewType) {
             INCOMING_MESSAGE_VIEW_TYPE -> {
                 val binding = IncomingChatItemBinding.inflate(layoutInflater, parent, false)
-                IncomingChatViewHolder(binding)
+                IncomingChatViewHolder(binding, onDownloadClick)
             }
 
             OUTGOING_MESSAGE_VIEW_TYPE -> {
