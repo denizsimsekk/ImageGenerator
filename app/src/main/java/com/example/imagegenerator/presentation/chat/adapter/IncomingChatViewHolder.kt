@@ -1,7 +1,6 @@
 package com.example.imagegenerator.presentation.chat.adapter
 
 import android.app.Dialog
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.Window
 import coil3.load

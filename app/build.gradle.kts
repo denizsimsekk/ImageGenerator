@@ -41,6 +41,7 @@ android {
     }
 }
 val nav_version = "2.8.5"
+val lottieVersion = "3.4.0"
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -63,6 +64,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("io.coil-kt.coil3:coil-compose:3.1.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+    implementation("com.airbnb.android:lottie:$lottieVersion")
 }
 
 // Allow references to generated code

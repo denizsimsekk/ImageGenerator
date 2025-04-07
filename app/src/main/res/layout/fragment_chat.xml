@@ -4,11 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/blank_fragment_title"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/prompt_edittext_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/giph"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/prompt_edittext_layout"
+        app:layout_constraintEnd_toEndOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/giph_arrow" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chats_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/prompt_edittext_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:boxBackgroundColor="#404855"
+        app:boxBackgroundColor="@color/color_tealish_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/send_button"
         app:layout_constraintStart_toStartOf="parent">

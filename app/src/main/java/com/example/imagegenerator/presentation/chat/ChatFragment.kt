@@ -31,11 +31,6 @@ class ChatFragment : Fragment() {
     private val viewModel: ChatViewModel by viewModels()
     private lateinit var downloader: AndroidDownloader
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +51,7 @@ class ChatFragment : Fragment() {
         binding.apply {
             sendButton.setOnClickListener {
                 if (!promptEdittext.text.isNullOrEmpty()) {
-                    viewModel.addChat(Chat.OutgoingMessage(promptEdittext.text.toString()))
+                    viewModel.addChat(promptEdittext.text.toString())
                     promptEdittext.setText(" ")
                 }
             }
@@ -66,7 +61,19 @@ class ChatFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.chats.observe(viewLifecycleOwner) {
-            adapter.setChats(it)
+            if (it.isEmpty().not()) {
+                setVisibility()
+                adapter.setChats(it)
+                binding.chatsRecyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+            }
+        }
+    }
+
+    private fun setVisibility() {
+        binding.apply {
+            tvTitle.visibility = View.GONE
+            giph.visibility = View.GONE
+            chatsRecyclerView.visibility = View.VISIBLE
         }
     }
 
