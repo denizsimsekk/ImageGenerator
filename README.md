@@ -6,7 +6,8 @@ In this project:
 - Download Manager
 - Hilt-Dagger
 
+<p float="left">
+  <img src="[screenshots/screen1.png](https://github.com/user-attachments/assets/1e70595a-4add-4229-b658-749ed315c603)" width="200" />
+  <img src="[screenshots/screen2.png](https://github.com/user-attachments/assets/50e1ce12-21d1-499d-baee-a171b178a67c)" width="200" />
+</p>
   
-
-![screenshot1](https://github.com/user-attachments/assets/1e70595a-4add-4229-b658-749ed315c603)
-![ss2](https://github.com/user-attachments/assets/50e1ce12-21d1-499d-baee-a171b178a67c)
