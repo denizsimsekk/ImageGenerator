@@ -1,6 +1,5 @@
 package com.example.imagegenerator.presentation.chat.adapter
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +12,7 @@ class ChatAdapter : RecyclerView.Adapter<BaseViewHolder<Chat>>() {
     private val chatList = arrayListOf<Chat>()
 
     fun setChats(list: List<Chat>) {
+        chatList.clear()
         chatList.addAll(list)
         notifyItemRangeInserted(chatList.size - 2, 2)
     }

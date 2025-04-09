@@ -52,7 +52,7 @@ class ChatFragment : Fragment() {
             sendButton.setOnClickListener {
                 if (!promptEdittext.text.isNullOrEmpty()) {
                     viewModel.addChat(promptEdittext.text.toString())
-                    promptEdittext.setText(" ")
+                    promptEdittext.setText("")
                 }
             }
         }

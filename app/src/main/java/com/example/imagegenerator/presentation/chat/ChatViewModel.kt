@@ -20,16 +20,14 @@ class ChatViewModel : ViewModel() {
 
     fun addChat(message: String) {
         viewModelScope.launch {
-            if (_chats.value.isNullOrEmpty() || _chats.value?.last() !is Chat.OutgoingMessage) {
-                val updatedList = mutableListOf<Chat>()
+            if (_chats.value?.lastOrNull() !is Chat.OutgoingMessage) {
+                val updatedList = _chats.value.orEmpty().toMutableList()
                 val outgoingMessage = Chat.OutgoingMessage(message)
                 updatedList.add(outgoingMessage)
                 updatedList.add(Chat.IncomingMessage(outgoingMessage.message.toPrompt()))
-                _chats.value?.clear()
                 _chats.value = updatedList
             }
         }
-
     }
 
     fun String.toPrompt(): String =
